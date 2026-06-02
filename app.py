@@ -315,7 +315,7 @@ st.markdown("---")
 # Barra lateral para controle dos limitantes e do peso do risco
 st.sidebar.header("Parâmetros do Modelo")
 st.sidebar.subheader("Ponderação de Risco")
-perfil = st.sidebar.selectbox("Configuração de Perfil", ["Conservador", "Moderado", "Liberal"])
+perfil = st.sidebar.selectbox("Configuração de Perfil", ["Conservador", "Moderado", "Agressivo"])
 
 if perfil == "Conservador":
     lambd_atual = 30
