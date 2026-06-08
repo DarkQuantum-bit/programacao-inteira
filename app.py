@@ -64,8 +64,8 @@ def obter_dados_originais():
         "TI (h)": [400, 350, 500, 180, 80, 250, 220, 240, 420, 140],
         "Marketing (h)": [120, 40, 20, 30, 10, 200, 0, 180, 20, 70],
         "Dados (h)": [50, 120, 300, 220, 20, 90, 40, 100, 150, 80],
-        "Categoria": ["Inovação", "Infraestrutura", "Dados", "Sustentabilidade", "Segurança", 
-                      "Inovação", "Infraestrutura", "Dados", "Sustentabilidade", "Segurança"]
+        "Categoria": ["Inovação", "Infraestrutura", "Inovação", "Dados", "Sustentabilidade", 
+                      "Inovação", "Segurança", "Dados", "Infraestrutura", "Sustentabilidade"]
     })
 
 # SUBPROBLEMA: RELAXAÇÃO LINEAR
