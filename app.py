@@ -293,7 +293,7 @@ def renderizar_frame_grafico(snapshot_dados):
         val_z = f"\nZ={no.z:.1f}" if no.z is not None else ""
         ax.text(no.x_pos, no.y_pos, f"Nó {no.id_no}{val_z}", color='#E0E6ED', fontsize=8, weight='bold', ha='center', va='center', zorder=3)
 
-    ax.set_title(f"Árvore de Resolução — Branch-and-Bound (MILP)\nNó Atual: {no_ativo_id} | Melhor Z Encontrado = {z_global:.2f}", 
+    ax.set_title(f"Branch-and-Bound (MILP)\nNó atual: {no_ativo_id} | Z = {z_global:.2f}", 
                  color='#00A3FF', fontsize=14, weight='bold', pad=15)
     
     plt.axis('off')
