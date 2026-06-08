@@ -9,7 +9,7 @@ import time
 
 # CONFIGURAÇÃO DE INTERFACE
 st.set_page_config(
-    page_title="Otimização de Portfólio - MILP",
+    page_title="Otimização de portfólio - MILP",
     page_icon=":bar_chart:",
     layout="wide",  
     initial_sidebar_state="expanded"
@@ -307,15 +307,15 @@ def renderizar_frame_grafico(snapshot_dados):
     return fig
 
 # STREAMLIT
-st.title("Otimização de Portfólio de Projetos")
+st.title("Otimização de portfólio de projetos")
 st.subheader("Seleção de projetos via Programação Linear Inteira Mista (MILP)")
 
 st.markdown("---")
 
 # Barra lateral para controle dos limitantes e do peso do risco
-st.sidebar.header("Parâmetros do Modelo")
-st.sidebar.subheader("Ponderação de Risco")
-perfil = st.sidebar.selectbox("Configuração de Perfil", ["Conservador", "Moderado", "Agressivo"])
+st.sidebar.header("Parâmetros do modelo")
+st.sidebar.subheader("Ponderação de risco")
+perfil = st.sidebar.selectbox("Configuração de perfil", ["Conservador", "Moderado", "Agressivo"])
 
 if perfil == "Conservador":
     lambd_atual = 30
@@ -329,12 +329,12 @@ else:
 
 st.sidebar.caption(fr"**Fator $\lambda$: {lambd_atual}** — *{descricao_perfil}*")
 
-st.sidebar.subheader("Restrições de Recursos")
-b_orcamento = st.sidebar.slider("Orçamento Total (k)", 400, 2000, 850, step=50)
+st.sidebar.subheader("Restrições de recursos")
+b_orcamento = st.sidebar.slider("Orçamento total (k)", 400, 2000, 850, step=50)
 cap_ti = st.sidebar.slider("Horas disponíveis - TI", 500, 2500, 1800, step=100)
 cap_mkt = st.sidebar.slider("Horas disponíveis - Marketing", 100, 1200, 500, step=50)
 cap_dados = st.sidebar.slider("Horas disponíveis - Dados", 100, 1500, 900, step=100)
-risco_maximo = st.sidebar.slider("Teto de Risco Acumulado", 5, 35, 15, step=1)
+risco_maximo = st.sidebar.slider("Teto de risco acumulado", 5, 35, 15, step=1)
 
 limites_dict = {
     "B": b_orcamento,
@@ -347,14 +347,14 @@ limites_dict = {
 df_projetos = obter_dados_originais()
 coef_obj_dinamico = [v - lambd_atual * r for v, r in zip(df_projetos["Valor (k)"], df_projetos["Risco"])]
 
-st.markdown("### Projetos Candidatos e Parâmetros")
+st.markdown("### Projetos")
 st.dataframe(df_projetos.style.background_gradient(cmap="Blues", subset=["Valor (k)", "Custo (k)"]), use_container_width=True)
 
 # Processamento do Branch-and-Bound
 arvore, z_otimo, solucao, passos = executar_branch_and_bound_completo(df_projetos, limites_dict, lambd_atual, coef_obj_dinamico)
 
 st.markdown("---")
-st.markdown("### Solução Ótima Encontrada")
+st.markdown("### Solução ótima encontrada")
 
 if solucao is None or z_otimo == -float('inf'):
     st.error("Instância inviável para as restrições selecionadas. Altere os limites na barra lateral.")
@@ -363,17 +363,17 @@ else:
     df_selecionados = df_projetos.iloc[indices_selecionados].copy()
     
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Função Objetivo (Z)", f"{z_otimo:.2f}")
-    col2.metric("Valor Total Retornado", f"{df_selecionados['Valor (k)'].sum()}k")
-    col3.metric("Orçamento Utilizado", f"{df_selecionados['Custo (k)'].sum()}k / {b_orcamento}k")
-    col4.metric("Risco Acumulado", f"{df_selecionados['Risco'].sum()} / {risco_maximo}")
+    col1.metric("Função objetivo (Z)", f"{z_otimo:.2f}")
+    col2.metric("Valor total retornado", f"{df_selecionados['Valor (k)'].sum()}k")
+    col3.metric("Orçamento utilizado", f"{df_selecionados['Custo (k)'].sum()}k / {b_orcamento}k")
+    col4.metric("Risco acumulado", f"{df_selecionados['Risco'].sum()} / {risco_maximo}")
     
-    st.markdown("#### Projetos Selecionados")
+    st.markdown("#### Projetos selecionados")
     st.dataframe(df_selecionados, use_container_width=True)
 
     st.markdown("---")
     st.markdown("### Execução do Branch-and-Bound")
-    st.markdown("Visualização passo a passo das ramificações e cortes efetuados pelo algoritmo.")
+    st.markdown("Visualização")
 
     if passos:
         chave_cenario = f"{perfil}_{b_orcamento}_{cap_ti}_{cap_mkt}_{cap_dados}_{risco_maximo}"
