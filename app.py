@@ -312,7 +312,6 @@ st.subheader("Seleção de projetos via Programação Linear Inteira Mista (MILP
 
 st.markdown("---")
 
-# Barra lateral para controle dos limitantes e do peso do risco
 st.sidebar.header("Parâmetros do modelo")
 st.sidebar.subheader("Ponderação de risco")
 perfil = st.sidebar.selectbox("Configuração de perfil", ["Conservador", "Moderado", "Agressivo"])
