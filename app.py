@@ -308,7 +308,7 @@ def renderizar_frame_grafico(snapshot_dados):
 
 # STREAMLIT
 st.title("Otimização de portfólio de projetos")
-st.subheader("Seleção de projetos via Programação Linear Inteira Mista (MILP)")
+st.subheader("Seleção de projetos via Programação Inteira")
 
 st.markdown("---")
 
